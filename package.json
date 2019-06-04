@@ -1,0 +1,21 @@
+{
+  "name": "sortGraph",
+  "private": true,
+  "scripts": {
+    "start": "meteor run"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.0.0-beta.36",
+    "d3": "^4.13.0",
+    "d3-array": "^1.2.1",
+    "d3-scale": "^2.0.0",
+    "d3-selection": "^1.3.0",
+    "meteor-node-stubs": "^0.3.2",
+    "react": "^16.8.6",
+    "react-bootstrap": "^1.0.0-beta.9",
+    "react-dom": "^16.8.6",
+    "react-dropdown": "^1.6.4",
+    "react-router-dom": "^5.0.0",
+    "reactstrap": "^8.0.0"
+  }
+}
