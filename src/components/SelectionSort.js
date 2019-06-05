@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import d3 from 'd3';
+import * as d3 from 'd3';
 import ReactDOM from 'react-dom';
 import AppActions from '../actions/AppActions';
-import AppConstants from '../constants/AppConstants';
+import AppConstants from '../constants/AppConstants'
 
 
 
@@ -19,9 +19,9 @@ export default class App extends Component {
       this.state.items = [ ...AppConstants.ITEM_LIST ];
       this.state.svg = d3.select("svg");
       this.state.length = AppConstants.ITEM_LIST.length;
-      this.state.i = 0;
+      this.state.i = AppConstants.ITEM_LIST.length -1;
       this.state.start = false;
-      this.insertionSort();
+      this.selectionSort();
     }
 
     componentDidUpdate = () => this.init();
@@ -30,35 +30,34 @@ export default class App extends Component {
     componentDidMount = () => this.init();
 
 
-    insertionSort() {
+    selectionSort() {
         AppActions.animate(this,this.state.items[this.state.i],this.state.items[this.state.j]);
 
-        this.state.el = this.state.items[this.state.i];
-        this.state.j = this.state.i;
-
-        while(this.state.j>0 && this.state.items[this.state.j-1]>this.state.el){
-            this.state.items[this.state.j] = this.state.items[this.state.j-1];
-            this.state.j--;
+        for (let j = (this.state.length - this.state.i); j > 0; j--) {
+            //Compare the adjacent positions
+            if (this.state.items[j] < this.state.items[j - 1]) {
+                //Swap the numbers
+                let tmp = this.state.items[j];
+                this.state.items[j] = this.state.items[j - 1];
+                this.state.items[j - 1] = tmp;
+                this.state.j = j;
+            }
         }
-        if(this.state.i <= this.state.items.length && this.state.j < this.state.items.length){
-          this.state.items[this.state.j] = this.state.el;
-          this.state.i++;
-          setTimeout(this.insertionSort.bind(this), 500);
-        }
+        this.state.i--;
+        if(this.state.i >= 0) setTimeout(this.selectionSort.bind(this), 500);
 
     }
 
     handleClick(event) {
       event.preventDefault();
        this.state.start = true;
-       this.insertionSort();
+       this.selectionSort();
     }
-
 
     render() {
         return (
-            <div>
-        <button onClick={this.handleClick.bind(this)}> Start </button>
+            <div class="jumbotron">
+        <button type="button" className="btn btn-primary" onClick={this.handleClick.bind(this)}> Start </button>
         <svg  id='chart' width="1200" height="240"></svg>
             </div>
     );

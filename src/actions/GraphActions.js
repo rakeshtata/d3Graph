@@ -1,4 +1,4 @@
-import d3 from 'd3';
+import * as d3 from 'd3';
 const GraphActions = {
   graph : (event,_this) => {
     d3.select("svg").selectAll("*").remove();

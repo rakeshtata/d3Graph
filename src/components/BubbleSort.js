@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import d3 from 'd3';
+import * as d3 from 'd3';
 import ReactDOM from 'react-dom';
 import AppActions from '../actions/AppActions';
 import AppConstants from '../constants/AppConstants';
-import { Button } from 'reactstrap';
+import 'bootstrap/dist/css/bootstrap.css';
+//import { Button } from 'reactstrap';
 
 // App component - represents the whole app
 export default class BubbleSort extends Component {
@@ -52,8 +53,8 @@ export default class BubbleSort extends Component {
 
     render() {
         return (
-            <div>
-            <button onClick={this.handleClick.bind(this)}> Start </button>
+            <div class="jumbotron">
+            <button type="button" className="btn btn-primary" onClick={this.handleClick.bind(this)}> Start </button>
         <svg  id='chart' width="1200" height="240"></svg>
             </div>
     );
