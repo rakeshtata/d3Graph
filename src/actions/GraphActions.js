@@ -19,8 +19,8 @@ const GraphActions = {
     var data = [];
 
     let yAxis = "sin";
-    if(event == "cos")  yAxis = "cos";
-    if(event == "tan")  yAxis = "tan";
+    if(event === "cos")  yAxis = "cos";
+    if(event === "tan")  yAxis = "tan";
 
 
 
@@ -32,7 +32,7 @@ const GraphActions = {
 
     var valueline2;
 
-    if(event == "sincos"){
+    if(event === "sincos"){
       var valueline2 = d3.line()
           .x(function(d) { return x(d.x); })
           .y(function(d) { return y(d.cos); });
@@ -56,14 +56,14 @@ const GraphActions = {
         // Scale the range of the data
         x.domain(d3.extent(data, function(d) { return d.x; }));
         y.domain(d3.extent(data, function(d) {
-          if(event == "tan") {
+          if(event === "tan") {
             if( d.tan > -0.8 && d.tan < 0.8) return d.tan;
           } else return d[yAxis]; }));
 
-          if(event == "sin") lineColor1 = "green";
-          if(event == "cos") lineColor1 = "red";
-          if(event == "tan") lineColor1 = "blue";
-          if(event == "sincos") {
+          if(event === "sin") lineColor1 = "green";
+          if(event === "cos") lineColor1 = "red";
+          if(event === "tan") lineColor1 = "blue";
+          if(event === "sincos") {
             lineColor1 = "green";
             lineColor2 = "red";
           };
@@ -76,7 +76,7 @@ const GraphActions = {
             .style("fill", "none")
             .attr("d", valueline);
 
-        if(event == "sincos"){
+        if(event === "sincos"){
           svg.append("path")
               .data([data])
               .attr("class", "line")
@@ -99,10 +99,10 @@ const GraphActions = {
 
 
     function animate(i){
-      if(event == "sin") data.push({"x":i,"sin":Math.sin(i)});
-      if(event == "cos") data.push({"x":i,"cos":Math.cos(i)});
-      if(event == "tan") data.push({"x":i,"tan":Math.tan(i)});
-      if(event == "sincos") data.push({"x":i,"sin":Math.sin(i),"cos":Math.cos(i+20.4)});
+      if(event === "sin") data.push({"x":i,"sin":Math.sin(i)});
+      if(event === "cos") data.push({"x":i,"cos":Math.cos(i)});
+      if(event === "tan") data.push({"x":i,"tan":Math.tan(i)});
+      if(event === "sincos") data.push({"x":i,"sin":Math.sin(i),"cos":Math.cos(i+20.4)});
       draw(data);
       processData();
     }

@@ -31,3 +31,12 @@
     transform: rotate(360deg);
   }
 }
+
+.nxt-button{
+  margin-left:6px;
+}
+
+.options{
+  width:600px;
+  display: inline-block
+}

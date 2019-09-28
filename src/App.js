@@ -1,31 +1,3 @@
-// import React from 'react';
-// import logo from './logo.svg';
-// import './App.css';
-//
-// function App() {
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <img src={logo} className="App-logo" alt="logo" />
-//         <p>
-//           Edit <code>src/App.js</code> and save to reload.
-//         </p>
-//         <a
-//           className="App-link"
-//           href="https://reactjs.org"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           Learn React
-//         </a>
-//       </header>
-//     </div>
-//   );
-// }
-//
-// export default App;
-
-
 import React, { Component } from "react";
 import BubbleSort from "./components/BubbleSort";
 import SelectionSort from "./components/SelectionSort";
@@ -37,6 +9,9 @@ import tangent from "./components/tangent";
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import logo from './logo.svg';
+import Dropdown from 'react-dropdown'
+import 'react-dropdown/style.css'
+
 
 import {
   BrowserRouter as Router,
@@ -46,54 +21,63 @@ import {
   withRouter
 } from "react-router-dom";
 
-function App() {
-  return (
-    <div className="App">
-    <div>
-      <table className="table">
-        <tr>
-          <th scope="col"><img src={logo} className="App-logo float-left" alt="logo" /></th>
-          <th scope="col"><h1 className="mx-auto d-block"> D3 Animation </h1></th>
-          <th scope="col"><img src={logo} className="App-logo float-right" alt="logo" /></th>
-        </tr>
-      </table>
-    </div>
-    <Router>
-      <div className="jumbotron">
-        <ul className="list-group">
-          <li className="list-group-item">
-            <Link to="/bubbleSort">Bubble Sort</Link>
-          </li>
-          <li className="list-group-item">
-            <Link to="/selectionSort">Selection Sort</Link>
-          </li>
-          <li className="list-group-item">
-            <Link to="/insertionSort">insertion Sort</Link>
-          </li>
-          <li className="list-group-item">
-            <Link to="/sine">Sine  Graph</Link>
-          </li>
-          <li className="list-group-item">
-            <Link to="/cosine">Cos Graph</Link>
-          </li>
-          <li className="list-group-item">
-            <Link to="/graph">Sine and Cos Graph</Link>
-          </li>
-          <li className="list-group-item">
-            <Link to="/tangent">Tan Graph</Link>
-          </li>
-        </ul>
-        <Route path="/bubbleSort" component={BubbleSort} />
-        <Route path="/selectionSort" component={SelectionSort} />
-        <Route path="/insertionSort" component={InsertionSort} />
-        <Route path="/graph" component={graph} />
-        <Route path="/sine" component={sine} />
-        <Route path="/cosine" component={cosine} />
-        <Route path="/tangent" component={tangent} />
+const options = [
+  {
+   type: 'group', name: 'Sorting', items: [
+     { value: '/bubbleSort', label: 'Bubble Sort'},
+     { value: '/selectionSort', label: 'Selection Sort' },
+     { value: '/insertionSort', label: 'Insertion Sort' },
+   ]
+  },
+  {
+   type: 'group', name: 'Graphs', items: [
+     { value: '/sine', label: 'Sine'},
+     { value: '/cosine', label: 'Cosine' },
+     { value: '/tangent', label: 'Tangent' },
+     { value: '/graph', label: 'Sine and Cos Graph' }
+   ]
+  }
+]
+
+
+
+
+
+class App extends Component {
+
+  _onSelect(option){
+    window.location.href=option.value;
+  }
+
+  render(){
+    return (
+      <div className="App">
+      <div>
+        <table className="table">
+          <tr>
+            <th scope="col"><img src={logo} className="App-logo float-left" alt="logo" /></th>
+            <th scope="col"><h1 className="mx-auto d-block"> D3 Animation </h1></th>
+            <th scope="col"><img src={logo} className="App-logo float-right" alt="logo" /></th>
+          </tr>
+        </table>
       </div>
-    </Router>
-    </div>
-  );
+      <Router>
+        <div className="jumbotron">
+
+        <Dropdown className="options" onChange={this._onSelect} options={options}  placeholder="Select an option" />
+
+          <Route path="/bubbleSort" component={BubbleSort} />
+          <Route path="/selectionSort" component={SelectionSort} />
+          <Route path="/insertionSort" component={InsertionSort} />
+          <Route path="/graph" component={graph} />
+          <Route path="/sine" component={sine} />
+          <Route path="/cosine" component={cosine} />
+          <Route path="/tangent" component={tangent} />
+        </div>
+      </Router>
+      </div>
+    );
+  }
 }
 
 export default App;

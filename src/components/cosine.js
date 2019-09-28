@@ -34,6 +34,7 @@ export default class Cos extends Component {
     render() {
         return (
             <div class="jumbotron">
+            <h3>Cosine Graph</h3>
               <div> <button type="button" className="btn btn-primary" onClick={this.handleClick.bind(this)}> Start </button> </div>
         <svg  id='chart' width="1200" height="240"></svg>
             </div>
