@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {useState, useEffect} from 'react';
 import * as d3 from 'd3';
 import ReactDOM from 'react-dom';
 import AppActions from '../actions/AppActions';
@@ -8,59 +8,54 @@ import AppConstants from '../constants/AppConstants'
 
 
 // App component - represents the whole app
-export default class App extends Component {
-    state = AppConstants.INITIAL_STATE;
+function SelectionSort() {
+    let [items, svg,pivot_i,value,el,pivot_j,start] = useState(AppConstants.INITIAL_STATE1);
 
-    constructor(props) {
-        super(props);
+
+
+    const init = () =>{
+      items = [ ...AppConstants.ITEM_LIST ];
+      svg = d3.select("svg");
+      pivot_i = AppConstants.ITEM_LIST.length -1;
+      start = false;
+      selectionSort();
     }
 
-    init(){
-      this.state.items = [ ...AppConstants.ITEM_LIST ];
-      this.state.svg = d3.select("svg");
-      this.state.length = AppConstants.ITEM_LIST.length;
-      this.state.i = AppConstants.ITEM_LIST.length -1;
-      this.state.start = false;
-      this.selectionSort();
-    }
-
-    componentDidUpdate = () => this.init();
+      useEffect(() => init());
 
 
-    componentDidMount = () => this.init();
+    const selectionSort = ()=> {
+        AppActions.animate(items,svg,items[pivot_i],items[pivot_j]);
 
-
-    selectionSort() {
-        AppActions.animate(this,this.state.items[this.state.i],this.state.items[this.state.j]);
-
-        for (let j = (this.state.length - this.state.i); j > 0; j--) {
+        for (let j = (items.length - pivot_i); j > 0; j--) {
             //Compare the adjacent positions
-            if (this.state.items[j] < this.state.items[j - 1]) {
+            if (items[j] < items[j - 1]) {
                 //Swap the numbers
-                let tmp = this.state.items[j];
-                this.state.items[j] = this.state.items[j - 1];
-                this.state.items[j - 1] = tmp;
-                this.state.j = j;
+                let tmp = items[j];
+                items[j] = items[j - 1];
+                items[j - 1] = tmp;
+                pivot_j = j;
             }
         }
-        this.state.i--;
-        if(this.state.i >= 0) setTimeout(this.selectionSort.bind(this), 500);
+        pivot_i--;
+        if(pivot_i >= 0 && start) setTimeout(selectionSort.bind(this), 500);
 
     }
 
-    handleClick(event) {
+    const handleClick = (event) => {
       event.preventDefault();
-       this.state.start = true;
-       this.selectionSort();
+       start = true;
+       selectionSort();
     }
 
-    render() {
-        return (
+
+    return (
             <div class="jumbotron">
             <h3>Selection Sort</h3>
-        <button type="button" className="btn btn-primary" onClick={this.handleClick.bind(this)}> Start </button>
-        <svg  id='chart' width="1200" height="240"></svg>
+            <button type="button" className="btn btn-primary" onClick={handleClick.bind(this)}> Start </button>
+            <svg  id='chart' width="1200" height="240"></svg>
             </div>
     );
-    }
+
 }
+export default SelectionSort;

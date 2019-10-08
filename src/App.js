@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import BubbleSort from "./components/BubbleSort";
 import SelectionSort from "./components/SelectionSort";
 import InsertionSort from "./components/InsertionSort";
@@ -43,13 +43,12 @@ const options = [
 
 
 
-class App extends Component {
+function App()  {
 
-  _onSelect(option){
+  const _onSelect = (option) => {
     window.location.href=option.value;
   }
 
-  render(){
     return (
       <div className="App">
       <div>
@@ -64,7 +63,7 @@ class App extends Component {
       <Router>
         <div className="jumbotron">
 
-        <Dropdown className="options" onChange={this._onSelect} options={options}  placeholder="Select an option" />
+        <Dropdown className="options" onChange={_onSelect} options={options}  placeholder="Select an option" />
 
           <Route path="/bubbleSort" component={BubbleSort} />
           <Route path="/selectionSort" component={SelectionSort} />
@@ -77,7 +76,6 @@ class App extends Component {
       </Router>
       </div>
     );
-  }
 }
 
 export default App;

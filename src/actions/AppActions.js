@@ -1,8 +1,8 @@
 import * as d3 from 'd3';
 
 const AppActions = {
-  animate : (_this,index1,index2) => {
-    const data = _this.state.items;
+  animate : (items,svg,index1,index2) => {
+    const data = items;
     const width = 1000;
     const height = 220;
     const margin = {
@@ -11,11 +11,11 @@ const AppActions = {
         bottom: 30,
         left: 30
     }
-    _this.state.svg.selectAll("*").remove();
+    svg.selectAll("*").remove();
     let x = d3.scaleBand().rangeRound([0, width]).padding(0.1),
         y = d3.scaleLinear().rangeRound([height, 0]);
 
-    let g = _this.state.svg.append("g")
+    let g = svg.append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
     y.domain([0, 20]);
