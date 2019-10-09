@@ -6,6 +6,7 @@ import graph from "./components/graph";
 import sine from "./components/sine";
 import cosine from "./components/cosine";
 import tangent from "./components/tangent";
+import pieChart from "./components/pieChart"
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import logo from './logo.svg';
@@ -36,7 +37,12 @@ const options = [
      { value: '/tangent', label: 'Tangent' },
      { value: '/graph', label: 'Sine and Cos Graph' }
    ]
-  }
+ },
+ {
+  type: 'group', name: 'Pie Chart', items: [
+    { value: '/pieChart', label: 'Pie Chart'}
+  ]
+ }
 ]
 
 
@@ -72,6 +78,7 @@ function App()  {
           <Route path="/sine" component={sine} />
           <Route path="/cosine" component={cosine} />
           <Route path="/tangent" component={tangent} />
+          <Route path="/pieChart" component={pieChart} />
         </div>
       </Router>
       </div>
