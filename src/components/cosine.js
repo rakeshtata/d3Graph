@@ -1,43 +1,27 @@
-import React, { Component } from 'react';
-import * as d3 from 'd3';
-import ReactDOM from 'react-dom';
+import React, {useEffect} from 'react';
 import GraphActions from '../actions/GraphActions';
 import 'bootstrap/dist/css/bootstrap.css';
 
 // App component - represents the whole app
-export default class Cos extends Component {
+function Cos(){
 
-    state = {svg: {}};
-    constructor(props) {
-        super(props);
-    }
-
-    componentDidUpdate = () => {
-      this.state.start = false;
-      GraphActions.graph("cos",this);
-    };
+  useEffect(() => GraphActions.graph("cos",false));
 
 
-    componentDidMount = () => {
-      this.state.start = false;
-      GraphActions.graph("cos",this);
-    };
-
-
-
-    handleClick(event) {
+    const handleClick = (event) => {
       event.preventDefault();
-       this.state.start = true;
-       GraphActions.graph("cos",this);
+       GraphActions.graph("cos",true);
     }
 
-    render() {
-        return (
-            <div class="jumbotron">
+
+    return (
+            <div className="jumbotron">
             <h3>Cosine Graph</h3>
-              <div> <button type="button" className="btn btn-primary" onClick={this.handleClick.bind(this)}> Start </button> </div>
-        <svg  id='chart' width="1200" height="240"></svg>
+              <div> <button type="button" className="btn btn-primary" onClick={handleClick}> Start </button> </div>
+              <svg  id='chart' width="1200" height="240"></svg>
             </div>
     );
-    }
+
 }
+
+export default Cos;

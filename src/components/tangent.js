@@ -1,41 +1,26 @@
-import React, { Component } from 'react';
-import * as d3 from 'd3';
-import ReactDOM from 'react-dom';
+import React, { useEffect } from 'react';
 import GraphActions from '../actions/GraphActions';
 
 // App component - represents the whole app
-export default class Tan extends Component {
+function Tan() {
 
-    state = {svg: {}};
-    constructor(props) {
-        super(props);
-    }
-
-    componentDidUpdate = () => {
-      this.state.start = false;
-      GraphActions.graph("tan",this);
-    };
+    useEffect(() => GraphActions.graph("tan",false));
 
 
-    componentDidMount = () => {
-      this.state.start = false;
-      GraphActions.graph("tan",this);
-    };
-
-
-    handleClick = (event) => {
+    const handleClick = (event) => {
       event.preventDefault();
-       this.state.start = true;
-       GraphActions.graph("tan",this);
+       GraphActions.graph("tan",true);
     }
 
-    render = () => {
-        return (
-            <div class="jumbotron">
-            <h3>Tangent Graph</h3>
-              <div> <button type="button" className="btn btn-primary" onClick={this.handleClick.bind(this)}> Start </button> </div>
-              <svg  id='chart' width="1200" height="240"></svg>
-            </div>
-    );
-    }
+
+      return (
+          <div className="jumbotron">
+          <h3>Tangent Graph</h3>
+            <div> <button type="button" className="btn btn-primary" onClick={handleClick}> Start </button> </div>
+            <svg  id='chart' width="1200" height="240"></svg>
+          </div>
+  );
+
 }
+
+export default Tan;

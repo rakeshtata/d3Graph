@@ -50,6 +50,10 @@ const AppActions = {
         .attr("width", x.bandwidth())
         .attr("height", function (d) {
             return height - y(d);
+        })
+        .attr("fill", function(d){
+          if(d == index2) return "red";
+          else return "black";
         });
 
       g.selectAll("text.bar")

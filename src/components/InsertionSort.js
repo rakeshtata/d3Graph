@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react';
 import * as d3 from 'd3';
-import ReactDOM from 'react-dom';
 import AppActions from '../actions/AppActions';
 import AppConstants from '../constants/AppConstants';
 
@@ -9,16 +8,16 @@ import AppConstants from '../constants/AppConstants';
 
 // App component - represents the whole app
 function InsertionSort() {
-    let [items, svg,item_length,pivot_i,value,el,pivot_j,start] = useState(AppConstants.INITIAL_STATE1);
+    const [start,setStart] = useState(false);
+    let items,svg,pivot_i,pivot_j,el;
 
 
 
     const init = () =>{
       items = [ ...AppConstants.ITEM_LIST ];
       svg = d3.select("svg");
-      item_length = AppConstants.ITEM_LIST.length;
       pivot_i = 0;
-      start = false;
+      setStart(false);
       insertionSort();
     }
 
@@ -45,14 +44,14 @@ function InsertionSort() {
 
     const handleClick = (event) =>{
       event.preventDefault();
-       start = true;
+       setStart(true);
        insertionSort();
     }
 
 
 
   return (
-            <div class="jumbotron">
+            <div className="jumbotron">
             <h3>Insertion Sort</h3>
             <button type="button" className="btn btn-primary" onClick={handleClick.bind(this)}> Start </button>
             <svg  id='chart' width="1200" height="240"></svg>

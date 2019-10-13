@@ -1,6 +1,6 @@
 import * as d3 from 'd3';
 const PieCharAction = {
-  chart : (event,_this) => {
+  chart : (start) => {
     d3.select("svg").selectAll("*").remove();
 
 
@@ -71,8 +71,10 @@ let colArr = ["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56","#7b6888"];
 
     function processData(){
         i = i + 0.1;
-        if(i<MAX_COUNT )
-            initSetTimeout(animate.bind(_this));
+
+        
+        if(i<MAX_COUNT && start)
+            initSetTimeout(animate.bind());
     }
 
     processData();

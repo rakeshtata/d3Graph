@@ -1,6 +1,6 @@
 import * as d3 from 'd3';
 const GraphActions = {
-  graph : (event,_this) => {
+  graph : (event,start) => {
     d3.select("svg").selectAll("*").remove();
 
     //let _this = this;
@@ -33,7 +33,7 @@ const GraphActions = {
     var valueline2;
 
     if(event === "sincos"){
-      var valueline2 = d3.line()
+          valueline2 = d3.line()
           .x(function(d) { return x(d.x); })
           .y(function(d) { return y(d.cos); });
     }
@@ -113,8 +113,8 @@ const GraphActions = {
 
     function processData(){
         i = i + 0.1;
-        if(i<MAX_COUNT && _this.state.start)
-            initSetTimeout(animate.bind(_this, i));
+        if(i<MAX_COUNT && start)
+            initSetTimeout(animate.bind(this,i));
     }
 
     processData();

@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react';
 import * as d3 from 'd3';
-import ReactDOM from 'react-dom';
 import AppActions from '../actions/AppActions';
 import AppConstants from '../constants/AppConstants';
 import 'bootstrap/dist/css/bootstrap.css';
@@ -9,12 +8,14 @@ import 'bootstrap/dist/css/bootstrap.css';
 // App component - represents the whole app
 function BubbleSort() {
 
-    let [items, svg,pivot_i,value,el,pivot_j,start] = useState(AppConstants.INITIAL_STATE1);
+    const [start,setStart] = useState(false);
+    let items,svg,pivot_i,pivot_j;
+
     const init = () => {
       items = [ ...AppConstants.ITEM_LIST ];
       svg = d3.select("svg");
       pivot_i = AppConstants.ITEM_LIST.length -1;
-      start = false;
+      setStart(false);
       bubbleSort();
     }
 
@@ -41,13 +42,13 @@ function BubbleSort() {
 
     const handleClick = (event) => {
       event.preventDefault();
-       start = true;
+       setStart(true);
        bubbleSort();
     }
 
 
         return (
-            <div class="jumbotron">
+            <div className="jumbotron">
             <h3>Bubble Sort</h3>
             <button type="button" className="btn btn-primary" onClick={handleClick.bind(this)}> Start </button>
             <svg  id='chart' width="1200" height="240"></svg>

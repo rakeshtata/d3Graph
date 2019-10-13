@@ -40,7 +40,7 @@ const options = [
  },
  {
   type: 'group', name: 'Pie Chart', items: [
-    { value: '/pieChart', label: 'Pie Chart'}
+    { value: '/pieChart', label: 'Pie Chart Spin'}
   ]
  }
 ]
@@ -59,11 +59,13 @@ function App()  {
       <div className="App">
       <div>
         <table className="table">
+        <tbody>
           <tr>
             <th scope="col"><img src={logo} className="App-logo float-left" alt="logo" /></th>
             <th scope="col"><h1 className="mx-auto d-block"> D3 Animation </h1></th>
             <th scope="col"><img src={logo} className="App-logo float-right" alt="logo" /></th>
           </tr>
+          </tbody>
         </table>
       </div>
       <Router>
