@@ -52,7 +52,7 @@ const AppActions = {
             return height - y(d);
         })
         .attr("fill", function(d){
-          if(d == index2) return "red";
+          if(d == index2 || d == index1) return "red";
           else return "black";
         });
 

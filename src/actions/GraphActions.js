@@ -15,7 +15,7 @@ const GraphActions = {
     var y = d3.scaleLinear().range([height, 0]);
 
     var i = 0;
-    const MAX_COUNT = 100;
+    const MAX_COUNT = 50;
     var data = [];
 
     let yAxis = "sin";

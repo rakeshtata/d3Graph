@@ -40,3 +40,26 @@
   width:600px;
   display: inline-block
 }
+
+.radioOption{
+  margin-right: 10px;
+}
+
+.sideNav{
+  width: 20%;
+  float: left;
+}
+.mainDiv{
+  width: 80%;
+  float: right;
+}
+.containerDiv{
+  text-align: left;
+}
+.btn-div{
+  margin-bottom: 20px;
+}
+
+.jumbotron{
+  background-color: transparent;
+}

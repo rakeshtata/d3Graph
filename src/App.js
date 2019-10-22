@@ -3,10 +3,7 @@ import BubbleSort from "./components/BubbleSort";
 import SelectionSort from "./components/SelectionSort";
 import InsertionSort from "./components/InsertionSort";
 import graph from "./components/graph";
-import sine from "./components/sine";
-import cosine from "./components/cosine";
-import tangent from "./components/tangent";
-import pieChart from "./components/pieChart"
+import pieChart from "./components/pieChart";
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import logo from './logo.svg';
@@ -32,10 +29,7 @@ const options = [
   },
   {
    type: 'group', name: 'Graphs', items: [
-     { value: '/sine', label: 'Sine'},
-     { value: '/cosine', label: 'Cosine' },
-     { value: '/tangent', label: 'Tangent' },
-     { value: '/graph', label: 'Sine and Cos Graph' }
+     { value: '/graph', label: 'Line Graph' }
    ]
  },
  {
@@ -77,9 +71,6 @@ function App()  {
           <Route path="/selectionSort" component={SelectionSort} />
           <Route path="/insertionSort" component={InsertionSort} />
           <Route path="/graph" component={graph} />
-          <Route path="/sine" component={sine} />
-          <Route path="/cosine" component={cosine} />
-          <Route path="/tangent" component={tangent} />
           <Route path="/pieChart" component={pieChart} />
         </div>
       </Router>
