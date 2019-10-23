@@ -72,7 +72,7 @@ function InputPage() {
         </div>
       </div>
       <div className="mainDiv">
-        <svg  id='chart' width="1000" height="240"></svg>
+        <svg  id='chart' className="graphSvgDiv"></svg>
       </div>
 </div>
     );

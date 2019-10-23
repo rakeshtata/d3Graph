@@ -60,6 +60,16 @@
   margin-bottom: 20px;
 }
 
+.svgDiv{
+  width: 1200px;
+  height: 240px;
+}
+
+.graphSvgDiv{
+  width: 1000px;
+  height: 240px;
+}
+
 .jumbotron{
   background-color: transparent;
 }

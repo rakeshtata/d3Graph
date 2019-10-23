@@ -54,7 +54,7 @@ function InsertionSort() {
             <div className="jumbotron">
             <h3>Insertion Sort</h3>
             <button type="button" className="btn btn-primary" onClick={handleClick.bind(this)}> Start </button>
-            <svg  id='chart' width="1200" height="240"></svg>
+            <svg  id='chart' className="svgDiv"></svg>
             </div>
     );
 
