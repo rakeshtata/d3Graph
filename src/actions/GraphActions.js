@@ -14,28 +14,31 @@ const GraphActions = {
     var x = d3.scaleTime().range([0, width]);
     var y = d3.scaleLinear().range([height, 0]);
 
-    var i = 0;
-    const MAX_COUNT = 50;
+    var i = -0.1;
+    const MAX_COUNT = 30;
     var data = [];
 
-    let yAxis = "sin";
-    if(event === "cos")  yAxis = "cos";
-    if(event === "tan")  yAxis = "tan";
+    let yAxis = event;
 
-
-
-    // define the line
-    var valueline = d3.line()
-        .x(function(d) { return x(d.x); })
-        .y(function(d) { return y(d[yAxis]); });
-
-
-    var valueline2;
-
+    var valueline1,valueline2;
     if(event === "sincos"){
+          valueline1 = d3.line()
+          .x(function(d) { return x(d.x); })
+          .y(function(d) { return y(d.sin); });
           valueline2 = d3.line()
           .x(function(d) { return x(d.x); })
           .y(function(d) { return y(d.cos); });
+    } else if(event === "tancot"){
+          valueline1 = d3.line()
+          .x(function(d) { return x(d.x); })
+          .y(function(d) { return y(d.tan); });
+          valueline2 = d3.line()
+          .x(function(d) { return x(d.x); })
+          .y(function(d) { return y(d.cot); });
+    } else{
+          valueline1 = d3.line()
+          .x(function(d) { return x(d.x); })
+          .y(function(d) { return y(d[yAxis]); });
     }
 
 
@@ -58,15 +61,31 @@ const GraphActions = {
         y.domain(d3.extent(data, function(d) {
           if(event === "tan") {
             if( d.tan > -0.8 && d.tan < 0.8) return d.tan;
-          } else return d[yAxis]; }));
+          } else if(event === "cot"){
+            if( d.cot > -0.8 && d.cot < 0.8) return d.cot;
+          } else if(event === "sec"){
+            if( d.sec > -5 && d.sec < 5) 
+            return d.sec;
+          } else if(event === "tancot"){
+            if( d.tan > -0.8 && d.tan < 0.8 && d.cot > -0.8 && d.cot < 0.8) return d.tan;
+          } else if(event === "sincos"){
+            return d.sin;
+          } else return d[yAxis];
+        }));
 
-          if(event === "sin") lineColor1 = "green";
-          if(event === "cos") lineColor1 = "red";
-          if(event === "tan") lineColor1 = "blue";
-          if(event === "sincos") {
-            lineColor1 = "green";
-            lineColor2 = "red";
-          };
+        if(event === "sin") lineColor1 = "green";
+        if(event === "cos") lineColor1 = "red";
+        if(event === "tan") lineColor1 = "blue";
+        if(event === "cot") lineColor1 = "maroon";
+        if(event === "sec") lineColor1 = "violet";
+        if(event === "sincos") {
+          lineColor1 = "green";
+          lineColor2 = "red";
+        };
+        if(event === "tancot") {
+          lineColor1 = "blue";
+          lineColor2 = "maroon";
+        };
 //console.log(valueline.toString())
         // Add the valueline path.
         svg.append("path")
@@ -74,9 +93,9 @@ const GraphActions = {
             .attr("class", "line")
             .style("stroke", lineColor1)    // set the line colour
             .style("fill", "none")
-            .attr("d", valueline);
+            .attr("d", valueline1);
 
-        if(event === "sincos"){
+        if(event === "sincos" || event === "tancot"){
           svg.append("path")
               .data([data])
               .attr("class", "line")
@@ -102,7 +121,10 @@ const GraphActions = {
       if(event === "sin") data.push({"x":i,"sin":Math.sin(i)});
       if(event === "cos") data.push({"x":i,"cos":Math.cos(i)});
       if(event === "tan") data.push({"x":i,"tan":Math.tan(i)});
+      if(event === "sec") data.push({"x":i,"sec":1/Math.cos(i+20)});
+      if(event === "cot") data.push({"x":i,"cot": (1/Math.tan(i+20))});
       if(event === "sincos") data.push({"x":i,"sin":Math.sin(i),"cos":Math.cos(i+20.4)});
+      if(event === "tancot") data.push({"x":i,"tan":Math.tan(i),"cot":1/Math.tan(i+40)});
       draw(data);
       processData();
     }

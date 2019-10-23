@@ -13,10 +13,7 @@ import 'react-dropdown/style.css'
 
 import {
   BrowserRouter as Router,
-  Route,
-  Link,
-  Redirect,
-  withRouter
+  Route
 } from "react-router-dom";
 
 const options = [

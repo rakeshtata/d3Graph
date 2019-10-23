@@ -50,7 +50,7 @@ let colArr = ["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56","#7b6888"];
         .enter()
         .append('path')
         .attr('d', d3.arc()
-          .innerRadius(0)
+          .innerRadius(10)
           .outerRadius(radius)
         )
         .attr('fill', function(d){ return(color(d.data.key)) })
@@ -72,7 +72,7 @@ let colArr = ["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56","#7b6888"];
     function processData(){
         i = i + 0.1;
 
-        
+
         if(i<MAX_COUNT && start)
             initSetTimeout(animate.bind());
     }
