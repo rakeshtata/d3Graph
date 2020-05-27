@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import * as d3 from 'd3';
-import AppActions from '../actions/AppActions';
+import AppCharts from '../visualizations/AppCharts';
 import AppConstants from '../constants/AppConstants';
 
 
@@ -25,7 +25,7 @@ function InsertionSort() {
 
 
     const insertionSort = () => {
-        AppActions.animate(items,svg,items[pivot_i],items[pivot_j]);
+        AppCharts.animate(items,svg,items[pivot_i],items[pivot_j]);
 
         el = items[pivot_i];
         pivot_j = pivot_i;

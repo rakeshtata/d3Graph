@@ -10,11 +10,11 @@ import logo from './logo.svg';
 import Dropdown from 'react-dropdown'
 import 'react-dropdown/style.css'
 
-
 import {
   BrowserRouter as Router,
   Route
 } from "react-router-dom";
+
 
 const options = [
   {
@@ -35,9 +35,6 @@ const options = [
   ]
  }
 ]
-
-
-
 
 
 function App()  {
@@ -62,7 +59,7 @@ function App()  {
       <Router>
         <div className="jumbotron">
 
-        <Dropdown className="options" onChange={_onSelect} options={options}  placeholder="Select an option" />
+        <Dropdown className="options dropDownDiv" onChange={_onSelect} options={options}  placeholder="Select an option" />
 
           <Route path="/bubbleSort" component={BubbleSort} />
           <Route path="/selectionSort" component={SelectionSort} />

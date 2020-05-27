@@ -1,19 +1,17 @@
 import React, {useState, useEffect} from "react";
-import GraphActions from '../actions/GraphActions';
-const gMap = {"1":"sin","2":"cos","3":"tan","4":"sincos","5":"cot","6":"tancot","7":"sec"}
+import GraphCharts from '../visualizations/GraphCharts';
+import { connect } from 'react-redux';
+import { setRadio } from '../actions';
+import { gMap } from '../actions';
+import PropTypes from 'prop-types'
 
-function InputPage() {
-  const [radio,setRadio] = useState(1);
-  useEffect(() => GraphActions.graph(gMap[radio],false));
+function InputPage({radio,handleClick}) {
 
-
-  const handleClick = (id,event) =>  {
-    setRadio(id);
-  }
+  useEffect(() => GraphCharts.graph(gMap[radio],false));
 
   const handleButtonClick = (event) =>  {
     event.preventDefault();
-     GraphActions.graph(gMap[radio],true);
+     GraphCharts.graph(gMap[radio],true);
   }
 
 
@@ -79,4 +77,18 @@ function InputPage() {
 
 }
 
-export default InputPage;
+
+InputPage.propTypes = {
+  radio: PropTypes.string.isRequired,
+  handleClick: PropTypes.func.isRequired
+}
+
+const mapStateToProps = (state,ownprops) => ({radio: state.radio})
+
+const mapDispatchToProps = (dispatch) => ({
+  handleClick: id =>  {
+    dispatch(setRadio(id))
+  }
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(InputPage)

@@ -1,12 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import * as d3 from 'd3';
-import AppActions from '../actions/AppActions';
+import AppCharts from '../visualizations/AppCharts';
 import AppConstants from '../constants/AppConstants'
 
-
-
-
-// App component - represents the whole app
 function SelectionSort() {
     const [start,setStart] = useState(false);
     let items,svg,pivot_i,pivot_j;
@@ -25,7 +21,7 @@ function SelectionSort() {
 
 
     const selectionSort = ()=> {
-        AppActions.animate(items,svg,items[pivot_i],items[pivot_j]);
+        AppCharts.animate(items,svg,items[pivot_i],items[pivot_j]);
 
         for (let j = (items.length - pivot_i); j > 0; j--) {
             //Compare the adjacent positions

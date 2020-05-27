@@ -1,6 +1,6 @@
 import * as d3 from 'd3';
 
-const AppActions = {
+const AppCharts = {
   animate : (items,svg,index1,index2) => {
     const data = items;
     const width = 1000;
@@ -76,4 +76,4 @@ const AppActions = {
 
 }
 
-export default AppActions;
+export default AppCharts;

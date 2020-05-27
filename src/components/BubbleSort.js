@@ -1,11 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import * as d3 from 'd3';
-import AppActions from '../actions/AppActions';
+import AppCharts from '../visualizations/AppCharts';
 import AppConstants from '../constants/AppConstants';
 import 'bootstrap/dist/css/bootstrap.css';
-//import { Button } from 'reactstrap';
 
-// App component - represents the whole app
 function BubbleSort() {
 
     const [start,setStart] = useState(false);
@@ -23,7 +21,7 @@ function BubbleSort() {
 
 
     const bubbleSort = ()=> {
-        AppActions.animate(items,svg,items[pivot_i],items[pivot_j]);
+        AppCharts.animate(items,svg,items[pivot_i],items[pivot_j]);
 
         for (let j = (items.length - pivot_i); j > 0; j--) {
             //Compare the adjacent positions

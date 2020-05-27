@@ -1,5 +1,5 @@
 import * as d3 from 'd3';
-const GraphActions = {
+const GraphCharts = {
   graph : (event,start) => {
     d3.select("svg").selectAll("*").remove();
 
@@ -64,7 +64,7 @@ const GraphActions = {
           } else if(event === "cot"){
             if( d.cot > -0.8 && d.cot < 0.8) return d.cot;
           } else if(event === "sec"){
-            if( d.sec > -5 && d.sec < 5) 
+            if( d.sec > -5 && d.sec < 5)
             return d.sec;
           } else if(event === "tancot"){
             if( d.tan > -0.8 && d.tan < 0.8 && d.cot > -0.8 && d.cot < 0.8) return d.tan;
@@ -146,4 +146,4 @@ const GraphActions = {
 
 }
 
-  export default GraphActions;
+  export default GraphCharts;

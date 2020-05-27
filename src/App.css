@@ -62,14 +62,24 @@
 
 .svgDiv{
   width: 1200px;
-  height: 240px;
+  height: 500px;
+}
+
+.pieDiv {
+  height: 500px;
 }
 
 .graphSvgDiv{
   width: 1000px;
-  height: 240px;
+  height: 500px;
 }
 
 .jumbotron{
   background-color: transparent;
+}
+
+.dropDownDiv{
+  @media only screen and (max-width: 600px) {
+    width: 80%;
+  }
 }
