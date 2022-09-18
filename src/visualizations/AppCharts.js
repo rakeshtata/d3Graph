@@ -1,17 +1,28 @@
 import * as d3 from 'd3';
+import React, { useEffect } from 'react';
+import { useSelector } from "react-redux";
 
-const AppCharts = {
-  animate : (items,svg,index1,index2) => {
-    const data = items;
+const AppCharts = () => {
+
+  const animate = (data,pivot) => {
     const width = 1000;
     const height = 220;
     const margin = {
         top: 20,
         right: 20,
-        bottom: 30,
-        left: 30
+        bottom: 40,
+        left: 10
     }
-    svg.selectAll("*").remove();
+
+    d3.select('.svgDiv> *').remove();
+    let svg = d3.select('.svgDiv').append('svg')
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+      .append("g")
+      .attr("transform",
+          "translate(" + margin.left + "," + margin.top + ")");
+
+
     let x = d3.scaleBand().rangeRound([0, width]).padding(0.1),
         y = d3.scaleLinear().rangeRound([height, 0]);
 
@@ -52,8 +63,9 @@ const AppCharts = {
             return height - y(d);
         })
         .attr("fill", function(d){
-          if(d === index2 || d === index1) return "red";
-          else return "black";
+          // if(d === pivot) return "red";
+          // else return "black";
+          return "blue"
         });
 
       g.selectAll("text.bar")
@@ -70,10 +82,19 @@ const AppCharts = {
           .attr("font-size", "11px")
           .attr("fill", "white")
           .text(function(d) { return d });
+  }
+
+  const items = useSelector(state => state.item.items);
+  const pivot = useSelector(state => state.item.pivot)
 
 
-      }
+  useEffect(() => {
+    items && animate(items,pivot)
+  })
 
+  return (
+     <div  id='chart' className="svgDiv"/>
+   )
 }
 
 export default AppCharts;

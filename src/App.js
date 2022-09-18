@@ -1,9 +1,7 @@
 import React from "react";
-import BubbleSort from "./components/BubbleSort";
-import SelectionSort from "./components/SelectionSort";
-import InsertionSort from "./components/InsertionSort";
-import graph from "./components/graph";
-import pieChart from "./components/pieChart";
+import Sort from "./components/Sort";
+import Graph from "./components/Graph";
+import PieChart from "./components/PieChart";
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import logo from './logo.svg';
@@ -12,16 +10,15 @@ import 'react-dropdown/style.css'
 
 import {
   BrowserRouter as Router,
-  Route
+  Route,
+  Routes
 } from "react-router-dom";
 
 
 const options = [
   {
    type: 'group', name: 'Sorting', items: [
-     { value: '/bubbleSort', label: 'Bubble Sort'},
-     { value: '/selectionSort', label: 'Selection Sort' },
-     { value: '/insertionSort', label: 'Insertion Sort' },
+     { value: '/Sort', label: 'Sort'}
    ]
   },
   {
@@ -30,8 +27,8 @@ const options = [
    ]
  },
  {
-  type: 'group', name: 'Pie Chart', items: [
-    { value: '/pieChart', label: 'Pie Chart Spin'}
+  type: 'group', name: 'Spin Game', items: [
+    { value: '/pieChart', label: 'Spin Game'}
   ]
  }
 ]
@@ -60,12 +57,12 @@ function App()  {
         <div className="jumbotron">
 
         <Dropdown className="options dropDownDiv" onChange={_onSelect} options={options}  placeholder="Select an option" />
+        <Routes>
 
-          <Route path="/bubbleSort" component={BubbleSort} />
-          <Route path="/selectionSort" component={SelectionSort} />
-          <Route path="/insertionSort" component={InsertionSort} />
-          <Route path="/graph" component={graph} />
-          <Route path="/pieChart" component={pieChart} />
+          <Route path="Sort" element={<Sort/>} />
+          <Route path="graph" element={<Graph/>} />
+          <Route path="pieChart" element={<PieChart/>} />
+            </Routes>
         </div>
       </Router>
       </div>

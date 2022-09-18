@@ -1,24 +1,24 @@
-import React, { useEffect} from 'react';
+import React from 'react';
 import PieCharts from '../visualizations/PieCharts';
 import 'bootstrap/dist/css/bootstrap.css';
+import { useDispatch } from "react-redux";
+import constants from '../constants/AppConstants'
 
 // App component - represents the whole app
-function PieChart(){
+const PieChart = () => {
 
-    //const [start,setStart] = useState(false);
-
-    useEffect(() => PieCharts.chart(false));
-
+    const dispatch = useDispatch();
+    const colors = constants.COLORS;
     const handleClick = (event) => {
       event.preventDefault();
-       PieCharts.chart(true);
+       dispatch({type:"PIE",colors});
     }
 
     return (
             <div className="jumbotron">
-            <h3>Pie Chart</h3>
+            <h3>Spin Game</h3>
               <div> <button type="button" className="btn btn-primary" onClick={handleClick}> Start </button> </div>
-              <svg  id='chart' className="pieDiv"></svg>
+              <PieCharts/>
             </div>
     );
 

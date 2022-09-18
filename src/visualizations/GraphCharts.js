@@ -1,88 +1,80 @@
 import * as d3 from 'd3';
-const GraphCharts = {
-  graph : (event,start) => {
-    d3.select("svg").selectAll("*").remove();
-
-    //let _this = this;
-    // set the dimensions and margins of the graph
-    var margin = {top: 20, right: 20, bottom: 30, left: 50},
-        width = 960 - margin.left - margin.right,
-        height = 500 - margin.top - margin.bottom;
+import React, { useEffect } from 'react';
+import { useSelector } from "react-redux";
 
 
-    // set the ranges
-    var x = d3.scaleTime().range([0, width]);
-    var y = d3.scaleLinear().range([height, 0]);
 
-    var i = -0.1;
-    const MAX_COUNT = 30;
-    var data = [];
+const GraphCharts = () => {
 
-    let yAxis = event;
+    const draw = (data,event) =>{
+        d3.select('.gsvgDiv> *').remove();
+        var margin = {top: 20, right: 20, bottom: 30, left: 50},
+            width = 960 - margin.left - margin.right,
+            height = 500 - margin.top - margin.bottom;
+        let svg =  d3.select('.gsvgDiv').append('svg')
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+            .attr("transform",
+                "translate(" + margin.left + "," + margin.top + ")");
 
-    var valueline1,valueline2;
-    if(event === "sincos"){
-          valueline1 = d3.line()
-          .x(function(d) { return x(d.x); })
-          .y(function(d) { return y(d.sin); });
-          valueline2 = d3.line()
-          .x(function(d) { return x(d.x); })
-          .y(function(d) { return y(d.cos); });
-    } else if(event === "tancot"){
-          valueline1 = d3.line()
-          .x(function(d) { return x(d.x); })
-          .y(function(d) { return y(d.tan); });
-          valueline2 = d3.line()
-          .x(function(d) { return x(d.x); })
-          .y(function(d) { return y(d.cot); });
-    } else{
-          valueline1 = d3.line()
-          .x(function(d) { return x(d.x); })
-          .y(function(d) { return y(d[yAxis]); });
-    }
-
-
-    // append the svg obgect to the body of the page
-    // appends a 'group' element to 'svg'
-    // moves the 'group' element to the top left margin
-    var svg = d3.select("svg")
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
-        .append("g")
-        .attr("transform",
-            "translate(" + margin.left + "," + margin.top + ")");
-
-    function draw(data) {
-        svg.selectAll("*").remove();
         let lineColor1,lineColor2;
+
+        // set the ranges
+        var x = d3.scaleTime().range([0, width]);
+        var y = d3.scaleLinear().range([height, 0]);
+
+        let yAxis = event;
+
+        var valueline1,valueline2;
+        if(event === "COS_SIN"){
+              valueline1 = d3.line()
+              .x(function(d) { return x(d.x); })
+              .y(function(d) { return y(d.SINE); });
+              valueline2 = d3.line()
+              .x(function(d) { return x(d.x); })
+              .y(function(d) { return y(d.COS); });
+        } else if(event === "TAN_COT"){
+              valueline1 = d3.line()
+              .x(function(d) { return x(d.x); })
+              .y(function(d) { return y(d.TAN); });
+              valueline2 = d3.line()
+              .x(function(d) { return x(d.x); })
+              .y(function(d) { return y(d.COT); });
+        } else{
+              valueline1 = d3.line()
+              .x(function(d) {
+                return x(d.x); })
+              .y(function(d) { return y(d[yAxis]); });
+        }
 
         // Scale the range of the data
         x.domain(d3.extent(data, function(d) { return d.x; }));
         y.domain(d3.extent(data, function(d) {
-          if(event === "tan") {
-            if( d.tan > -0.8 && d.tan < 0.8) return d.tan;
-          } else if(event === "cot"){
-            if( d.cot > -0.8 && d.cot < 0.8) return d.cot;
-          } else if(event === "sec"){
-            if( d.sec > -5 && d.sec < 5)
-            return d.sec;
-          } else if(event === "tancot"){
-            if( d.tan > -0.8 && d.tan < 0.8 && d.cot > -0.8 && d.cot < 0.8) return d.tan;
-          } else if(event === "sincos"){
-            return d.sin;
+          if(event === "TAN") {
+            if( d.TAN > -0.8 && d.TAN < 0.8) return d.TAN;
+          } else if(event === "COT"){
+            if( d.COT > -0.8 && d.COT < 0.8) return d.COT;
+          } else if(event === "SEC"){
+            if( d.SEC > -5 && d.SEC < 5)
+            return d.SEC;
+          } else if(event === "TAN_COT"){
+            if( d.TAN > -0.8 && d.TAN < 0.8 && d.COT > -0.8 && d.COT < 0.8) return d.TAN;
+          } else if(event === "COS_SIN"){
+            return d.SINE;
           } else return d[yAxis];
         }));
 
-        if(event === "sin") lineColor1 = "green";
-        if(event === "cos") lineColor1 = "red";
-        if(event === "tan") lineColor1 = "blue";
-        if(event === "cot") lineColor1 = "maroon";
-        if(event === "sec") lineColor1 = "violet";
-        if(event === "sincos") {
+        if(event === "SINE") lineColor1 = "green";
+        if(event === "COS") lineColor1 = "red";
+        if(event === "TAN") lineColor1 = "blue";
+        if(event === "COT") lineColor1 = "maroon";
+        if(event === "SEC") lineColor1 = "violet";
+        if(event === "COS_SIN") {
           lineColor1 = "green";
           lineColor2 = "red";
         };
-        if(event === "tancot") {
+        if(event === "TAN_COT") {
           lineColor1 = "blue";
           lineColor2 = "maroon";
         };
@@ -95,7 +87,7 @@ const GraphCharts = {
             .style("fill", "none")
             .attr("d", valueline1);
 
-        if(event === "sincos" || event === "tancot"){
+        if(event === "COS_SIN" || event === "TAN_COT"){
           svg.append("path")
               .data([data])
               .attr("class", "line")
@@ -117,30 +109,18 @@ const GraphCharts = {
     }
 
 
-    function animate(i){
-      if(event === "sin") data.push({"x":i,"sin":Math.sin(i)});
-      if(event === "cos") data.push({"x":i,"cos":Math.cos(i)});
-      if(event === "tan") data.push({"x":i,"tan":Math.tan(i)});
-      if(event === "sec") data.push({"x":i,"sec":1/Math.cos(i+20)});
-      if(event === "cot") data.push({"x":i,"cot": (1/Math.tan(i+20))});
-      if(event === "sincos") data.push({"x":i,"sin":Math.sin(i),"cos":Math.cos(i+20.4)});
-      if(event === "tancot") data.push({"x":i,"tan":Math.tan(i),"cot":1/Math.tan(i+40)});
-      draw(data);
-      processData();
-    }
 
-    function initSetTimeout(callback){
-        setTimeout(callback, 10)
-    }
+  const data = useSelector(state => state.graph.glist);
+  const event = useSelector(state => state.graph.event);
 
-    function processData(){
-        i = i + 0.1;
-        if(i<MAX_COUNT && start)
-            initSetTimeout(animate.bind(this,i));
-    }
 
-    processData();
-  }
+  useEffect(() => {
+    data && draw(data,event)
+  })
+
+  return (
+     <div  id='graph' className="gsvgDiv"/>
+   )
 
 
 

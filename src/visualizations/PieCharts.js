@@ -1,33 +1,23 @@
 import * as d3 from 'd3';
-const PieCharts = {
-  chart : (start) => {
-    d3.select("svg").selectAll("*").remove();
+import React, { useEffect } from 'react';
+import { useSelector } from "react-redux";
+
+const PieCharts = () => {
+
+  const draw = (colArr) => {
+
+      d3.select('.psvgDiv> *').remove();
+      var width = 450;
+      var height = 450;
+      var margin = 40;
 
 
-    const MAX_COUNT = 20;
-    var i = 0;
-
-    var width = 450;
-    var height = 450;
-    var margin = 40;
+      var radius = Math.min(width, height) / 2 - margin;
 
 
-  var radius = Math.min(width, height) / 2 - margin;
+      var data = {a: 10, b: 10, c:10, d:10, e:10,f:10}
 
-
-var data = {a: 10, b: 10, c:10, d:10, e:10,f:10}
-let colArr = ["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56","#7b6888"];
-
-
-
-
-  function shuffle(array) {
-    return array.sort(() => Math.random() - 0.5);
-  }
-
-  function draw(data) {
-
-      var svg = d3.select("svg")
+      var svg = d3.select('.psvgDiv').append('svg')
           .attr("width", width)
           .attr("height", height)
           .append("g")
@@ -43,7 +33,7 @@ let colArr = ["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56","#7b6888"];
 
       var color = d3.scaleOrdinal()
         .domain(data)
-        .range(shuffle(colArr))
+        .range(colArr)
       svg
         .selectAll('whatever')
         .data(data_ready)
@@ -59,24 +49,15 @@ let colArr = ["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56","#7b6888"];
         .style("opacity", 0.7)
   }
 
+  const colorArr = useSelector(state => state.pie.pColorlist);
 
-    function animate(){
-      draw(data);
-      processData();
-    }
+  useEffect(() => {
+    colorArr && draw(colorArr)
+  })
 
-    function initSetTimeout(callback){
-        setTimeout(callback, 10)
-    }
-
-    function processData(){
-        i = i + 0.1;
-        if(i<MAX_COUNT && start)
-            initSetTimeout(animate.bind());
-    }
-
-    processData();
-  }
+  return (
+     <div  id='pie' className="psvgDiv"/>
+   )
 
 
 
