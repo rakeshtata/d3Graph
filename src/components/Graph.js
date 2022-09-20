@@ -32,7 +32,7 @@ const Graph = () => {
 
 
   return (
-    <div className="container">
+    <div className="jumbotron">
       <div className="row sideNav">
         <div className="col-sm-12">
 

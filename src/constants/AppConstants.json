@@ -1,4 +1,115 @@
 {
 	"INIT_ITEM_LIST": [9,10,4,3,5,7,6,8,15,20,13,14,11,19,17,18,16,12],
-	"COLORS": ["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56","#7b6888"]
+	"COLORS": ["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56","#7b6888"],
+	"HISTORY_DATE":  [{
+					"startdate": 736,
+					"enddate": 1192,
+					"type": "Tomara"
+			},
+			{
+					"startdate": 1206,
+					"enddate": 1526,
+					"type": "Delhi Sultanate"
+			},
+			{
+					"startdate": 1526,
+					"enddate": 1857,
+					"type": "Mughal"
+			},
+			{
+					"startdate": 1336,
+					"enddate": 1646,
+					"type": "Vijayanagara"
+			},
+			{
+					"startdate": 1674,
+					"enddate": 1818,
+					"type": "Marathas"
+			},
+			{
+					"startdate": 1216,
+					"enddate": 1323,
+					"type": "Padhyas"
+			},
+			{
+					"startdate": 850,
+					"enddate": 1334,
+					"type": "Yadava"
+			},
+			{
+					"startdate": 1026,
+					"enddate": 1343,
+					"type": "Hoyasala"
+			},
+			{
+					"startdate": 1228,
+					"enddate": 1826,
+					"type": "Ahom"
+			},
+			{
+					"startdate": 624,
+					"enddate": 1189,
+					"type": "E Chalukya"
+			},
+			{
+					"startdate": 900,
+					"enddate": 1199,
+					"type": "Pala"
+			},
+			{
+					"startdate": 800,
+					"enddate": 1305,
+					"type": "Paramara"
+			},
+			{
+					"startdate": 1078,
+					"enddate": 1434,
+					"type": "Ganga"
+			},
+			{
+					"startdate": 1163,
+					"enddate": 1323,
+					"type": "Kakatiya"
+			},
+			{
+					"startdate": 1512,
+					"enddate": 1686,
+					"type": "Qutub Shahi"
+			},
+			{
+					"startdate": 1724,
+					"enddate": 1948,
+					"type": "Asaf jahi"
+			},
+			{
+					"startdate": 1347,
+					"enddate": 1518,
+					"type": "Badami"
+			},
+			{
+					"startdate": 1102,
+					"enddate": 1528,
+					"type": "Venad"
+			},
+			{
+					"startdate": 1799,
+					"enddate": 1849,
+					"type": "Sikh"
+			},
+			{
+					"startdate": 1505,
+					"enddate": 1961,
+					"type": "Portugese"
+			},
+			{
+					"startdate": 1612,
+					"enddate": 1947,
+					"type": "English"
+			},
+			{
+					"startdate": 1668,
+					"enddate": 1954,
+					"type": "French"
+			}
+	]
 }

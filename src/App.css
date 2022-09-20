@@ -52,10 +52,23 @@
 .mainDiv{
   width: 80%;
   float: right;
+  background-color: lightblue;
 }
 .containerDiv{
   text-align: left;
+  margin-left:20%
 }
+.pageHeader{
+  background-color: #D1FF33;
+}
+
+.container {
+   background-color: lightblue;
+}
+.App {
+  background-color: lightblue;
+}
+
 .btn-div{
   margin-bottom: 20px;
 }
@@ -75,7 +88,8 @@
 }
 
 .jumbotron{
-  background-color: transparent;
+  background-color: lightblue;
+  height: 1500px;
 }
 
 .dropDownDiv{

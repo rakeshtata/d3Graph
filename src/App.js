@@ -2,6 +2,7 @@ import React from "react";
 import Sort from "./components/Sort";
 import Graph from "./components/Graph";
 import PieChart from "./components/PieChart";
+import History from "./components/History";
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import logo from './logo.svg';
@@ -30,7 +31,12 @@ const options = [
   type: 'group', name: 'Spin Game', items: [
     { value: '/pieChart', label: 'Spin Game'}
   ]
- }
+},
+{
+ type: 'group', name: 'History', items: [
+   { value: '/history', label: 'history'}
+ ]
+}
 ]
 
 
@@ -42,7 +48,7 @@ function App()  {
 
     return (
       <div className="App">
-      <div>
+      <div className="pageHeader">
         <table className="table">
         <tbody>
           <tr>
@@ -62,7 +68,8 @@ function App()  {
           <Route path="Sort" element={<Sort/>} />
           <Route path="graph" element={<Graph/>} />
           <Route path="pieChart" element={<PieChart/>} />
-            </Routes>
+          <Route path="history" element={<History/>} />
+        </Routes>
         </div>
       </Router>
       </div>

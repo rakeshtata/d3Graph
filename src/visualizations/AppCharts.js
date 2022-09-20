@@ -18,6 +18,7 @@ const AppCharts = () => {
     let svg = d3.select('.svgDiv').append('svg')
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)
+      .attr("style", 'margin-left:30%')
       .append("g")
       .attr("transform",
           "translate(" + margin.left + "," + margin.top + ")");
