@@ -43,20 +43,14 @@ const HistCharts = () => {
         .attr("class", "tooltip")
 
     const x = d3.scaleLinear()
-        .domain([d3.min(histData, function (d) {
-            return d.startdate;
-        }), d3.max(histData, function (d) {
-            return d.enddate;
-        })])
+        .domain([d3.min(histData, (d) => d.startdate), d3.max(histData, (d) => d.enddate)])
         .range([0, width]);
     const x2 = d3.scaleLinear().range([0, width]);
         // y = d3.scaleOrdinal().range([height, 0]),
     const y2 = d3.scaleLinear().range([height2, 0]);
 
     const y = d3.scaleBand()
-        .domain(histData.map(function (entry) {
-            return entry.type;
-        }))
+        .domain(histData.map((entry)=> entry.type))
         .rangeRound([height, 0])
 
     // colors for each type
@@ -152,16 +146,10 @@ const HistCharts = () => {
         .attr("class", "circle")
         .attr("y", 0)
         .attr("transform", rectTransform)
-        .attr("height", function (d) {
-            return y.bandwidth();
-        })
-        .attr("width", function (d) {
-            return (x(d.enddate) - x(d.startdate))
-        })
-        .style("fill", function (d) {
-            return type2color[d.type]
-        })
-        .on("mouseover", function (d) {
+        .attr("height", (d) => y.bandwidth())
+        .attr("width", (d) => x(d.enddate) - x(d.startdate))
+        .style("fill", (d) => type2color[d.type])
+        .on("mouseover", (d) => {
             tooltip
                 .style("left", d3.event.pageX + "px")
                 .style("top", d3.event.pageY + "px")
@@ -169,15 +157,13 @@ const HistCharts = () => {
                 .html((d.type) + "<br> from :" + d.startdate+ "<br> to :" + d.enddate
                     .toISOString().slice(0, 19));
         })
-        .on("mouseout", function (d) {
+        .on("mouseout", (d) => {
             tooltip.style("display", "none")
         });
 
     const area2 = d3.area()
         .curve(d3.curveMonotoneX)
-        .x(function (d) {
-            return x2(d.startdate);
-        })
+        .x((d) =>  x2(d.startdate))
         .y0(height2);
 
 
