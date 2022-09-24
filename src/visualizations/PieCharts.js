@@ -7,17 +7,17 @@ const PieCharts = () => {
   const draw = (colArr) => {
 
       d3.select('.psvgDiv> *').remove();
-      var width = 450;
-      var height = 450;
-      var margin = 40;
+      const width = 450;
+      const height = 450;
+      const margin = 40;
 
 
-      var radius = Math.min(width, height) / 2 - margin;
+      const radius = Math.min(width, height) / 2 - margin;
 
 
-      var data = {a: 10, b: 10, c:10, d:10, e:10,f:10}
+      const data = {a: 10, b: 10, c:10, d:10, e:10,f:10}
 
-      var svg = d3.select('.psvgDiv').append('svg')
+      const svg = d3.select('.psvgDiv').append('svg')
           .attr("width", width)
           .attr("height", height)
           .append("g")
@@ -26,14 +26,13 @@ const PieCharts = () => {
       // Create dummy data
 
 
-      var pie = d3.pie()
-        .value(function(d) {return d.value; })
-      var data_ready = pie(d3.entries(data))
+      const pie = d3.pie().value((d) => d.value)
+
+      const data_ready = pie(d3.entries(data))
       svg.selectAll("*").remove();
 
-      var color = d3.scaleOrdinal()
-        .domain(data)
-        .range(colArr)
+      const color = d3.scaleOrdinal().domain(data).range(colArr)
+
       svg
         .selectAll('whatever')
         .data(data_ready)
@@ -43,7 +42,7 @@ const PieCharts = () => {
           .innerRadius(40)
           .outerRadius(radius)
         )
-        .attr('fill', function(d){ return(color(d.data.key)) })
+        .attr('fill', (d) => color(d.data.key))
         .attr("stroke", "black")
         .style("stroke-width", "2px")
         .style("opacity", 0.7)

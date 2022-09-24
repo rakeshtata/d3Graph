@@ -8,10 +8,10 @@ const GraphCharts = () => {
 
     const draw = (data,event) =>{
         d3.select('.gsvgDiv> *').remove();
-        var margin = {top: 20, right: 20, bottom: 30, left: 50},
-            width = 960 - margin.left - margin.right,
-            height = 500 - margin.top - margin.bottom;
-        let svg =  d3.select('.gsvgDiv').append('svg')
+        const margin = {top: 20, right: 20, bottom: 30, left: 50};
+        const width = 960 - margin.left - margin.right;
+        const height = 500 - margin.top - margin.bottom;
+        const svg =  d3.select('.gsvgDiv').append('svg')
             .attr("width", width + margin.left + margin.right)
             .attr("height", height + margin.top + margin.bottom)
             .append("g")
@@ -21,36 +21,37 @@ const GraphCharts = () => {
         let lineColor1,lineColor2;
 
         // set the ranges
-        var x = d3.scaleTime().range([0, width]);
-        var y = d3.scaleLinear().range([height, 0]);
+        const x = d3.scaleTime().range([0, width]);
+        const y = d3.scaleLinear().range([height, 0]);
 
         let yAxis = event;
 
-        var valueline1,valueline2;
+        let valueline1,valueline2;
         if(event === "COS_SIN"){
               valueline1 = d3.line()
-              .x(function(d) { return x(d.x); })
-              .y(function(d) { return y(d.SINE); });
+              .x((d) =>  x(d.x))
+              .y((d) =>  y(d.SINE));
+
               valueline2 = d3.line()
-              .x(function(d) { return x(d.x); })
-              .y(function(d) { return y(d.COS); });
+              .x((d) =>  x(d.x))
+              .y((d) =>  y(d.COS));
         } else if(event === "TAN_COT"){
               valueline1 = d3.line()
-              .x(function(d) { return x(d.x); })
-              .y(function(d) { return y(d.TAN); });
+              .x((d) =>  x(d.x))
+              .y((d) =>  y(d.TAN));
+              
               valueline2 = d3.line()
-              .x(function(d) { return x(d.x); })
-              .y(function(d) { return y(d.COT); });
+              .x((d) =>  x(d.x))
+              .y((d) =>  y(d.COT));
         } else{
               valueline1 = d3.line()
-              .x(function(d) {
-                return x(d.x); })
-              .y(function(d) { return y(d[yAxis]); });
+              .x((d) => x(d.x))
+              .y((d) => y(d[yAxis]));
         }
 
         // Scale the range of the data
-        x.domain(d3.extent(data, function(d) { return d.x; }));
-        y.domain(d3.extent(data, function(d) {
+        x.domain(d3.extent(data, (d) => d.x));
+        y.domain(d3.extent(data, (d) => {
           if(event === "TAN") {
             if( d.TAN > -0.8 && d.TAN < 0.8) return d.TAN;
           } else if(event === "COT"){

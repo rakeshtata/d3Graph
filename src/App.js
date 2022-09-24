@@ -40,7 +40,7 @@ const options = [
 ]
 
 
-function App()  {
+const App = () => {
 
   const _onSelect = (option) => {
     window.location.href=option.value;
